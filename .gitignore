@@ -1,0 +1,109 @@
+# -----------------------------------------------------------------------------
+# Operating systems and editors
+# -----------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.fleet/
+.history/
+
+# Local agent and workspace state
+.agents/
+.codex/
+
+# -----------------------------------------------------------------------------
+# Dart and Flutter
+# -----------------------------------------------------------------------------
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub/
+.pub-cache/
+build/
+coverage/
+doc/api/
+*.symbols
+*.dSYM.zip
+*.dSYM.noindex
+
+# Keep `pubspec.lock` under version control for reproducible app builds.
+
+# -----------------------------------------------------------------------------
+# Android / Gradle
+# -----------------------------------------------------------------------------
+android/.gradle/
+android/.cxx/
+android/captures/
+android/local.properties
+android/key.properties
+android/app/debug/
+android/app/profile/
+android/app/release/
+*.apk
+*.aab
+*.apks
+
+# Signing keys and certificates must never be committed.
+*.jks
+*.keystore
+*.p12
+*.p8
+*.mobileprovision
+*.cer
+*.der
+
+# -----------------------------------------------------------------------------
+# Apple platforms / Xcode
+# -----------------------------------------------------------------------------
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/ephemeral/
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+ios/Runner/GeneratedPluginRegistrant.*
+ios/**/xcuserdata/
+ios/**/*.xcuserstate
+ios/**/*.xccheckout
+ios/**/*.moved-aside
+DerivedData/
+*.xcarchive
+
+# Keep shared Xcode schemes, workspace settings, project files, entitlements,
+# and Swift Package resolution under version control.
+
+# -----------------------------------------------------------------------------
+# Local configuration, secrets, and generated service files
+# -----------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.env.local
+secrets.*
+*.secret
+google-services.json
+GoogleService-Info.plist
+
+# -----------------------------------------------------------------------------
+# Logs, reports, and temporary files
+# -----------------------------------------------------------------------------
+*.log
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+*.pid
+*.stackdump
+.cache/
+tmp/
+temp/
+test-results/

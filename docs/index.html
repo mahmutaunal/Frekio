@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#111020" />
+    <meta
+      name="description"
+      content="Privacy Policy for Frekio, an Internet radio application by AlpWare Studio."
+    />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'"
+    />
+    <title>Frekio Privacy Policy · AlpWare Studio</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f7f7fc;
+        --surface: rgba(255, 255, 255, 0.82);
+        --surface-strong: #ffffff;
+        --text: #171622;
+        --muted: #625f70;
+        --line: rgba(35, 31, 64, 0.1);
+        --violet: #5d5be6;
+        --violet-soft: #eeedff;
+        --cyan: #19a9d1;
+        --shadow: 0 24px 70px rgba(47, 39, 110, 0.11);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #090817;
+          --surface: rgba(29, 28, 43, 0.88);
+          --surface-strong: #1c1b2a;
+          --text: #f8f7ff;
+          --muted: #c2bfce;
+          --line: rgba(255, 255, 255, 0.1);
+          --violet: #9b94ff;
+          --violet-soft: #29264c;
+          --cyan: #4dd8ff;
+          --shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
+        }
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 88% 2%, rgba(93, 91, 230, 0.22), transparent 31rem),
+          radial-gradient(circle at 5% 38%, rgba(77, 216, 255, 0.17), transparent 27rem),
+          var(--bg);
+        font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+      a { color: var(--violet); text-underline-offset: 3px; }
+      a:hover { text-decoration-thickness: 2px; }
+      .shell { width: min(940px, calc(100% - 32px)); margin: 0 auto; }
+      header { padding: 56px 0 26px; }
+      .brand { display: flex; align-items: center; gap: 14px; margin-bottom: 48px; }
+      .brand-mark {
+        display: grid;
+        place-items: center;
+        width: 48px;
+        height: 48px;
+        color: white;
+        border-radius: 15px;
+        background: linear-gradient(145deg, #7370ff, #39358f);
+        box-shadow: 0 14px 30px rgba(93, 91, 230, 0.28);
+      }
+      .brand-mark svg { width: 28px; height: 28px; }
+      .brand-name { font-weight: 800; letter-spacing: -0.02em; }
+      .brand-studio { color: var(--muted); font-size: 0.87rem; }
+      .eyebrow {
+        color: var(--violet);
+        font-size: 0.76rem;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+      h1 {
+        max-width: 760px;
+        margin: 10px 0 14px;
+        font-size: clamp(2.6rem, 8vw, 5.5rem);
+        line-height: 0.96;
+        letter-spacing: -0.065em;
+      }
+      .lead { max-width: 690px; color: var(--muted); font-size: 1.12rem; }
+      .meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+      .pill, .language-nav a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 36px;
+        padding: 7px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--muted);
+        background: var(--surface);
+        font-size: 0.84rem;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .language-nav { display: flex; gap: 8px; margin-top: 18px; }
+      .language-nav a:hover { color: var(--text); border-color: var(--violet); }
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin: 34px 0 20px;
+      }
+      .summary article {
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(20px);
+      }
+      .summary strong { display: block; margin-bottom: 5px; font-size: 0.98rem; }
+      .summary span { color: var(--muted); font-size: 0.9rem; }
+      main { padding-bottom: 64px; }
+      .policy {
+        margin-top: 18px;
+        padding: clamp(22px, 5vw, 52px);
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(24px);
+      }
+      .policy + .policy { margin-top: 28px; }
+      .policy-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--line);
+      }
+      .policy-header h2 { margin: 0; font-size: 1.55rem; letter-spacing: -0.025em; }
+      .locale {
+        padding: 5px 10px;
+        border-radius: 999px;
+        color: var(--violet);
+        background: var(--violet-soft);
+        font-size: 0.75rem;
+        font-weight: 800;
+      }
+      h3 { margin: 32px 0 9px; font-size: 1.08rem; letter-spacing: -0.01em; }
+      p { margin: 8px 0; }
+      ul { margin: 9px 0 0; padding-left: 21px; }
+      li + li { margin-top: 8px; }
+      .callout {
+        margin: 20px 0;
+        padding: 17px 18px;
+        border-left: 4px solid var(--cyan);
+        border-radius: 0 15px 15px 0;
+        background: color-mix(in srgb, var(--cyan) 8%, transparent);
+      }
+      footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 28px 0 44px;
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+      @media (max-width: 700px) {
+        header { padding-top: 32px; }
+        .brand { margin-bottom: 34px; }
+        .summary { grid-template-columns: 1fr; }
+        .policy-header, footer { align-items: flex-start; flex-direction: column; }
+      }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    </style>
+  </head>
+  <body>
+    <header class="shell">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="3.5" fill="currentColor" />
+            <path d="M10.4 10.4a8 8 0 0 0 0 11.2M21.6 10.4a8 8 0 0 1 0 11.2M6.2 6.2a14 14 0 0 0 0 19.6M25.8 6.2a14 14 0 0 1 0 19.6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+          </svg>
+        </span>
+        <span>
+          <span class="brand-name">Frekio</span><br />
+          <span class="brand-studio">by AlpWare Studio</span>
+        </span>
+      </div>
+      <div class="eyebrow">Privacy · Clear by design</div>
+      <h1>Privacy Policy</h1>
+      <p class="lead">
+        Frekio works without an account, ads, analytics, or a developer-operated
+        backend. This policy explains what remains on your device and which
+        network requests are necessary to discover and play Internet radio.
+      </p>
+      <div class="meta">
+        <span class="pill">Effective 11 August 2026</span>
+        <span class="pill">Frekio for Android and iOS</span>
+      </div>
+      <nav class="language-nav" aria-label="Policy languages">
+        <a href="#english" lang="en">English</a>
+        <a href="#turkce" lang="tr">Türkçe</a>
+      </nav>
+      <section class="summary" aria-label="Privacy summary">
+        <article><strong>No account</strong><span>No registration or profile is required.</span></article>
+        <article><strong>No tracking SDK</strong><span>No advertising, analytics, or cross-app tracking.</span></article>
+        <article><strong>Local preferences</strong><span>Favorites and history stay on your device.</span></article>
+      </section>
+    </header>
+
+    <main class="shell">
+      <article class="policy" id="english" lang="en">
+        <div class="policy-header"><h2>English</h2><span class="locale">EN</span></div>
+
+        <h3>1. Scope and operator</h3>
+        <p>
+          This Privacy Policy applies to the Frekio mobile application for Android
+          and iOS (the “App”), published by AlpWare Studio (“we”, “us”, or “our”).
+          It does not govern the independent radio stations, directory servers,
+          app stores, operating-system services, or websites that the App may use.
+        </p>
+
+        <h3>2. Information we do not collect</h3>
+        <p>
+          Frekio has no user accounts and contains no advertising, analytics,
+          crash-reporting, profiling, attribution, or tracking SDKs. AlpWare Studio
+          does not operate an App backend that receives your listening history,
+          favorites, searches, or device preferences.
+        </p>
+
+        <h3>3. Information stored on your device</h3>
+        <p>The App stores the following information locally so its features work:</p>
+        <ul>
+          <li>favorite, recently played, and last-played stations;</li>
+          <li>language, appearance, and playback preferences;</li>
+          <li>cached public station-directory data and timestamps; and</li>
+          <li>current station and artwork state used by the home-screen widget.</li>
+        </ul>
+        <p>
+          This information remains under the control of your device and is removed
+          when you clear the App's storage or uninstall it, subject to any backup
+          retained by your operating system. Depending on your Android or iCloud
+          backup settings, locally stored App data may be included in a system-managed
+          device backup. AlpWare Studio cannot access those backups.
+        </p>
+
+        <h3>4. Network requests and third-party services</h3>
+        <p>Internet access is necessary for the App's core purpose.</p>
+        <ul>
+          <li>
+            <strong>Radio Browser:</strong> Frekio contacts community-operated Radio
+            Browser servers to load public station metadata. A search sends the text
+            you enter and selected country filter. Selecting a station sends Radio
+            Browser's documented station-UUID click request to support public
+            popularity statistics.
+          </li>
+          <li>
+            <strong>Radio broadcasters:</strong> playback connects your device directly
+            to the selected station's stream server. Broadcasters may receive standard
+            network information such as your IP address, request time, user agent, and
+            stream request.
+          </li>
+          <li>
+            <strong>Artwork hosts:</strong> the App or operating system may request a
+            station logo from the image URL published in the directory. The image host
+            may receive standard network information.
+          </li>
+        </ul>
+        <div class="callout">
+          These services are independent from AlpWare Studio and may process technical
+          request logs under their own terms and privacy practices. Some broadcaster
+          streams use HTTP rather than HTTPS; traffic to those streams may not be
+          encrypted in transit.
+        </div>
+
+        <h3>5. Permissions and device capabilities</h3>
+        <p>
+          Frekio uses Internet access, user-visible background media playback, media
+          controls, and widget capabilities. It does not request access to your precise
+          or approximate location, contacts, camera, microphone, photo library, SMS,
+          call log, advertising identifier, or broad file storage.
+        </p>
+
+        <h3>6. Support communications</h3>
+        <p>
+          If you contact us by email, we receive the address, message, and attachments
+          you choose to provide. We use them only to respond, maintain support and
+          security records, and meet legal obligations. You may request deletion of a
+          support conversation unless retention is required for security or law.
+        </p>
+
+        <h3>7. Data sharing, sale, and retention</h3>
+        <p>
+          We do not sell personal information and do not share it for advertising or
+          cross-context behavioral tracking. App preferences are retained locally until
+          you delete them. AlpWare Studio retains support emails only as reasonably
+          necessary for the purposes described above.
+        </p>
+
+        <h3>8. Children</h3>
+        <p>
+          Frekio is a general-audience radio utility and is not directed specifically
+          to children. We do not knowingly collect personal information from children
+          through the App. Radio programming is supplied by independent broadcasters,
+          and guardians should assess whether a station is appropriate.
+        </p>
+
+        <h3>9. Your choices</h3>
+        <p>
+          You can remove local App information by clearing Frekio's storage or
+          uninstalling the App. You can stop network activity by stopping playback and
+          closing the App. Requests concerning support correspondence can be sent to
+          the contact address below.
+        </p>
+
+        <h3>10. Policy hosting and international processing</h3>
+        <p>
+          This page may be hosted by GitHub Pages, which may process ordinary web-server
+          logs under <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's Privacy Statement</a>.
+          Radio Browser, broadcasters, artwork hosts, app stores, and operating-system
+          providers may operate in different countries. Their processing is governed
+          by their own policies.
+        </p>
+
+        <h3>11. Changes</h3>
+        <p>
+          We may update this policy when the App, its services, or legal requirements
+          change. The effective date at the top identifies the latest revision.
+          Material changes will be published at this URL before or when they take effect.
+        </p>
+
+        <h3>12. Contact</h3>
+        <p>
+          AlpWare Studio<br />
+          Email: <a href="mailto:contact@alpwarestudio.com">contact@alpwarestudio.com</a><br />
+          Website: <a href="https://www.alpwarestudio.com/">www.alpwarestudio.com</a>
+        </p>
+      </article>
+
+      <article class="policy" id="turkce" lang="tr">
+        <div class="policy-header"><h2>Türkçe</h2><span class="locale">TR</span></div>
+
+        <h3>1. Kapsam ve uygulama sağlayıcısı</h3>
+        <p>
+          Bu Gizlilik Politikası, AlpWare Studio (“biz”) tarafından yayımlanan Android
+          ve iOS için Frekio mobil uygulaması (“Uygulama”) için geçerlidir. Bağımsız
+          radyo istasyonlarının, dizin sunucularının, uygulama mağazalarının, işletim
+          sistemi hizmetlerinin veya Uygulamanın kullandığı internet sitelerinin veri
+          uygulamalarını yönetmez.
+        </p>
+
+        <h3>2. Toplamadığımız bilgiler</h3>
+        <p>
+          Frekio'da kullanıcı hesabı bulunmaz; reklam, analiz, çökme raporlama,
+          profilleme, ilişkilendirme veya takip SDK'sı yer almaz. AlpWare Studio;
+          dinleme geçmişinizi, favorilerinizi, aramalarınızı ya da cihaz tercihlerinizi
+          alan bir Uygulama sunucusu işletmez.
+        </p>
+
+        <h3>3. Cihazınızda saklanan bilgiler</h3>
+        <p>Özelliklerin çalışması için aşağıdaki bilgiler yerel olarak saklanır:</p>
+        <ul>
+          <li>favori, son dinlenen ve en son çalınan istasyonlar;</li>
+          <li>dil, görünüm ve oynatma tercihleri;</li>
+          <li>önbelleğe alınmış herkese açık istasyon dizini verileri ve zamanları; ve</li>
+          <li>ana ekran widget'ının kullandığı mevcut istasyon ve kapak durumu.</li>
+        </ul>
+        <p>
+          Bu bilgiler cihazınızın kontrolünde kalır ve işletim sisteminizin sakladığı
+          yedekler hariç olmak üzere Uygulama verilerini temizlediğinizde veya Uygulamayı
+          kaldırdığınızda silinir. Android ya da iCloud yedekleme ayarlarınıza bağlı
+          olarak yerel Uygulama verileri sistem tarafından yönetilen cihaz yedeğine
+          dahil edilebilir. AlpWare Studio bu yedeklere erişemez.
+        </p>
+
+        <h3>4. Ağ istekleri ve üçüncü taraf hizmetler</h3>
+        <p>İnternet erişimi Uygulamanın temel işlevi için gereklidir.</p>
+        <ul>
+          <li>
+            <strong>Radio Browser:</strong> Frekio, herkese açık istasyon bilgilerini
+            almak için topluluk tarafından işletilen Radio Browser sunucularına bağlanır.
+            Arama yaptığınızda girdiğiniz metin ve seçtiğiniz ülke filtresi gönderilir.
+            Bir istasyon seçildiğinde herkese açık popülerlik istatistiklerine katkı
+            sağlayan, belgelenmiş istasyon UUID tıklama isteği gönderilir.
+          </li>
+          <li>
+            <strong>Radyo yayıncıları:</strong> oynatma sırasında cihazınız doğrudan
+            seçtiğiniz istasyonun yayın sunucusuna bağlanır. Yayıncı; IP adresi, istek
+            zamanı, kullanıcı aracısı ve yayın isteği gibi standart ağ bilgilerini alabilir.
+          </li>
+          <li>
+            <strong>Kapak görseli sunucuları:</strong> Uygulama veya işletim sistemi,
+            dizinde yayımlanan görsel adresinden istasyon logosunu isteyebilir. Görsel
+            sunucusu standart ağ bilgilerini alabilir.
+          </li>
+        </ul>
+        <div class="callout">
+          Bu hizmetler AlpWare Studio'dan bağımsızdır ve teknik istek kayıtlarını kendi
+          koşulları ile gizlilik uygulamalarına göre işleyebilir. Bazı radyo yayınları
+          HTTPS yerine HTTP kullanır; bu yayınlara giden trafik aktarım sırasında
+          şifrelenmemiş olabilir.
+        </div>
+
+        <h3>5. İzinler ve cihaz yetenekleri</h3>
+        <p>
+          Frekio; internet erişimi, kullanıcıya görünür arka plan medya oynatımı, medya
+          kontrolleri ve widget özelliklerini kullanır. Kesin veya yaklaşık konum,
+          kişiler, kamera, mikrofon, fotoğraf arşivi, SMS, arama kaydı, reklam kimliği
+          ya da geniş dosya depolama erişimi istemez.
+        </p>
+
+        <h3>6. Destek iletişimi</h3>
+        <p>
+          Bize e-posta gönderirseniz paylaşmayı seçtiğiniz adresi, mesajı ve ekleri
+          alırız. Bunları yalnızca yanıt vermek, destek ve güvenlik kayıtlarını tutmak
+          ve yasal yükümlülükleri karşılamak için kullanırız. Güvenlik veya hukuk
+          nedeniyle saklama zorunlu değilse destek yazışmasının silinmesini isteyebilirsiniz.
+        </p>
+
+        <h3>7. Veri paylaşımı, satışı ve saklama</h3>
+        <p>
+          Kişisel bilgileri satmayız; reklam veya farklı bağlamlarda davranışsal takip
+          amacıyla paylaşmayız. Uygulama tercihleri siz silene kadar yerel olarak kalır.
+          AlpWare Studio destek e-postalarını yalnızca yukarıdaki amaçlar için makul
+          ölçüde gerekli olduğu süre boyunca saklar.
+        </p>
+
+        <h3>8. Çocuklar</h3>
+        <p>
+          Frekio genel kullanıcı kitlesine yönelik bir radyo aracıdır ve özellikle
+          çocuklara yönelik değildir. Uygulama üzerinden çocuklardan bilerek kişisel
+          bilgi toplamayız. Radyo içerikleri bağımsız yayıncılar tarafından sağlanır;
+          bir istasyonun uygunluğunu ebeveyn veya vasiler değerlendirmelidir.
+        </p>
+
+        <h3>9. Seçimleriniz</h3>
+        <p>
+          Frekio'nun depolama alanını temizleyerek veya Uygulamayı kaldırarak yerel
+          bilgileri silebilirsiniz. Oynatmayı durdurup Uygulamayı kapatarak ağ etkinliğini
+          sonlandırabilirsiniz. Destek yazışmalarıyla ilgili taleplerinizi aşağıdaki
+          adrese gönderebilirsiniz.
+        </p>
+
+        <h3>10. Politikanın barındırılması ve uluslararası işleme</h3>
+        <p>
+          Bu sayfa GitHub Pages tarafından barındırılabilir ve GitHub,
+          <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub Gizlilik Bildirimi</a>
+          kapsamında olağan web sunucusu kayıtlarını işleyebilir. Radio Browser,
+          yayıncılar, görsel sunucuları, uygulama mağazaları ve işletim sistemi
+          sağlayıcıları farklı ülkelerde çalışabilir ve kendi politikalarına tabidir.
+        </p>
+
+        <h3>11. Değişiklikler</h3>
+        <p>
+          Uygulama, kullanılan hizmetler veya yasal gereklilikler değiştiğinde bu
+          politikayı güncelleyebiliriz. En güncel sürüm, sayfanın üstündeki yürürlük
+          tarihiyle belirtilir. Önemli değişiklikler yürürlüğe girmeden önce veya
+          yürürlüğe girdiğinde bu adreste yayımlanır.
+        </p>
+
+        <h3>12. İletişim</h3>
+        <p>
+          AlpWare Studio<br />
+          E-posta: <a href="mailto:contact@alpwarestudio.com">contact@alpwarestudio.com</a><br />
+          İnternet sitesi: <a href="https://www.alpwarestudio.com/">www.alpwarestudio.com</a>
+        </p>
+      </article>
+    </main>
+
+    <footer class="shell">
+      <span>© 2026 AlpWare Studio</span>
+      <span>Frekio · Privacy by design</span>
+    </footer>
+  </body>
+</html>

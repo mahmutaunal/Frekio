@@ -1,0 +1,4 @@
+storePassword=change-me
+keyPassword=change-me
+keyAlias=frekio
+storeFile=/absolute/path/to/frekio-upload-key.jks
