@@ -7,7 +7,7 @@
     your phone, home screen, car, and system media controls.
   </p>
   <p align="center">
-    <a href="https://play.google.com/store/apps/details?id=com.mahmutalperenunal.passwordsbook">
+    <a href="https://play.google.com/store/apps/details?id=com.alpwarestudio.frekio">
       <img alt="Get it on Google Play" height="72" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" />
     </a>
   </p>
