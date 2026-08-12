@@ -6,6 +6,11 @@
     Discover live stations from Turkey, search worldwide, and keep listening across
     your phone, home screen, car, and system media controls.
   </p>
+  <p align="center">
+    <a href="https://play.google.com/store/apps/details?id=com.mahmutalperenunal.passwordsbook">
+      <img alt="Get it on Google Play" height="72" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" />
+    </a>
+  </p>
   <p>
     <img src="https://img.shields.io/badge/Flutter-stable-02569B?logo=flutter&amp;logoColor=white" alt="Flutter stable" />
     <img src="https://img.shields.io/badge/platform-Android%20%7C%20iOS-5D5BE6" alt="Android and iOS" />
