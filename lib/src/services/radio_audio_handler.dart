@@ -339,7 +339,9 @@ class RadioAudioHandler extends BaseAudioHandler with QueueHandler {
     title: liveTitle ?? station.name,
     album: station.name,
     artist: liveTitle == null ? station.tags.take(2).join(' • ') : station.name,
-    artUri: Uri.tryParse(station.favicon),
+    artUri: station.favicon.trim().isEmpty
+        ? null
+        : Uri.tryParse(station.favicon.trim()),
     playable: true,
     isLive: true,
     extras: {

@@ -28,6 +28,8 @@
 - [ ] Real release keystore configured; never publish with debug signing.
 - [ ] App Bundle (`.aab`) release build.
 - [ ] Background media notification and lock-screen controls.
+- [ ] Android 13+ first-play media-player permission, allow/deny and system-settings recovery.
+- [ ] Play-installed build: native review and flexible in-app update flows.
 - [ ] Android home-screen widget play/pause/stop and process-restart restore.
 - [ ] Bluetooth/headset media buttons.
 - [ ] Android Auto Desktop Head Unit test.
@@ -40,6 +42,9 @@
 - [ ] Final AppIcon assets.
 - [ ] Background audio on physical iPhone.
 - [ ] Control Center / lock screen / Bluetooth.
+- [ ] Verify iOS requests no notification permission for Now Playing.
+- [ ] Production build: StoreKit review quota behavior and App Store version check.
+- [ ] Runner and widget versions both match `pubspec.yaml`.
 - [ ] Enable App Group `group.com.alpwarestudio.frekio` for Runner and FrekioWidgetExtension.
 - [ ] iOS 17+ widget play/pause/stop on a physical device.
 - [ ] Request/enable Apple CarPlay audio entitlement if full CarPlay browsing is part of the release.

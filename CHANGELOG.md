@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Replaced hard-coded version labels with the installed package version/build.
+- Added first-play Android media-player permission and settings recovery; iOS
+  Now Playing remains notification-permission-free.
+- Added policy-aware native rating prompts after meaningful playback milestones.
+- Added startup/manual update checks and Google Play flexible in-app updates.
+- Applied the AlpWare Studio asset to the Settings brand card.
+- Synchronized iOS Runner and widget extension versions with `pubspec.yaml`.
 - Restored a zero-warning, fully compiling Flutter codebase and expanded tests.
 - Added native CarPlay Favorites/Recent browsing with cold-start engine support.
 - Added Android and iOS 17+ interactive playback widgets.

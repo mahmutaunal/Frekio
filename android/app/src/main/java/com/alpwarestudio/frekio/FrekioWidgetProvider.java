@@ -154,7 +154,7 @@ public final class FrekioWidgetProvider extends AppWidgetProvider {
         connection.setConnectTimeout(5000);
         connection.setReadTimeout(7000);
         connection.setInstanceFollowRedirects(true);
-        connection.setRequestProperty("User-Agent", "Frekio/1.3");
+        connection.setRequestProperty("User-Agent", "Frekio Android Widget");
         connection.connect();
         if (connection.getResponseCode() < 200 || connection.getResponseCode() >= 300) return;
 

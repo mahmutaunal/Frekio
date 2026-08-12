@@ -13,16 +13,17 @@ class RadioBrowserException implements Exception {
 }
 
 class RadioBrowserApi {
-  RadioBrowserApi({HttpClient? client}) : _client = client ?? HttpClient() {
+  RadioBrowserApi({HttpClient? client, String? userAgent})
+    : _client = client ?? HttpClient(),
+      _userAgent = userAgent ?? 'Frekio (contact@alpwarestudio.com)' {
     _client.connectionTimeout = const Duration(seconds: 8);
     _client.idleTimeout = const Duration(seconds: 15);
   }
 
   final HttpClient _client;
+  final String _userAgent;
   final Random _random = Random.secure();
   List<String> _servers = const [];
-
-  static const _userAgent = 'Frekio/1.3 (contact@alpwarestudio.com)';
 
   Future<List<Station>> popularTurkey({int limit = 120}) async {
     final query = {

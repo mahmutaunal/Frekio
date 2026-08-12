@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../app_state.dart';
 import '../l10n/strings.dart';
+import '../services/app_engagement_service.dart';
 import 'design/frekio_design.dart';
 import 'pages/discover_page.dart';
 import 'pages/favorites_page.dart';
@@ -18,8 +19,28 @@ class HomeShell extends StatefulWidget {
   State<HomeShell> createState() => _HomeShellState();
 }
 
-class _HomeShellState extends State<HomeShell> {
+class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
   int _index = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance.addPostFrameCallback((_) => _runStartupFlows());
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      widget.state.refreshNotificationStatus();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,6 +169,41 @@ class _HomeShellState extends State<HomeShell> {
   void _select(int value) {
     if (value == _index) return;
     setState(() => _index = value);
+  }
+
+  Future<void> _runStartupFlows() async {
+    final update = await widget.state.checkForUpdate();
+    if (!mounted || update.status != UpdateStatus.available) return;
+    await _showUpdateDialog(update);
+  }
+
+  Future<void> _showUpdateDialog(UpdateCheckResult update) async {
+    final s = S.of(context);
+    final install = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        icon: const Icon(Icons.system_update_rounded),
+        title: Text(s.updateAvailable),
+        content: Text(s.updateAvailableBody(update.availableVersion)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text(s.later),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(s.updateNow),
+          ),
+        ],
+      ),
+    );
+    if (install != true) return;
+    final started = await widget.state.installAvailableUpdate();
+    if (!started && mounted) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(s.updateFailed)));
+    }
   }
 }
 

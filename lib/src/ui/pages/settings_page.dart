@@ -4,6 +4,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../app_state.dart';
 import '../../config/alpware_links.dart';
 import '../../l10n/strings.dart';
+import '../../services/app_engagement_service.dart';
+import '../../services/notification_permission_service.dart';
 import '../design/frekio_design.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -77,6 +79,30 @@ class SettingsPage extends StatelessWidget {
             ),
           ),
         ),
+        SliverToBoxAdapter(child: _NotificationCard(state: state)),
+        SliverToBoxAdapter(child: _SectionLabel(s.engagement)),
+        SliverToBoxAdapter(
+          child: _LinkGroup(
+            items: [
+              _LinkItem(
+                icon: Icons.star_rounded,
+                title: s.rateFrekio,
+                detail: s.rateFrekioDescription,
+                color: const Color(0xFFFFBE4F),
+                onTap: () => _rate(context, state),
+              ),
+              _LinkItem(
+                icon: Icons.system_update_rounded,
+                title: s.checkForUpdates,
+                detail: state.checkingForUpdate
+                    ? s.checkingForUpdates
+                    : s.appIsUpToDate,
+                color: FrekioPalette.cyan,
+                onTap: () => _checkForUpdates(context, state),
+              ),
+            ],
+          ),
+        ),
         SliverToBoxAdapter(child: _SectionLabel(s.supportAndLegal)),
         SliverToBoxAdapter(
           child: _LinkGroup(
@@ -106,7 +132,7 @@ class SettingsPage extends StatelessWidget {
           ),
         ),
         SliverToBoxAdapter(child: _SectionLabel(s.application)),
-        SliverToBoxAdapter(child: _ApplicationCard()),
+        SliverToBoxAdapter(child: _ApplicationCard(state: state)),
         const SliverToBoxAdapter(child: SizedBox(height: 196)),
       ],
     );
@@ -119,6 +145,62 @@ class SettingsPage extends StatelessWidget {
         context,
       ).showSnackBar(SnackBar(content: Text(S.of(context).linkUnavailable)));
     }
+  }
+
+  static Future<void> _rate(BuildContext context, AppState state) async {
+    final opened = await state.requestNativeReview();
+    if (!opened && context.mounted) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(S.of(context).reviewUnavailable)));
+    }
+  }
+
+  static Future<void> _checkForUpdates(
+    BuildContext context,
+    AppState state,
+  ) async {
+    final result = await state.checkForUpdate();
+    if (!context.mounted) return;
+    final s = S.of(context);
+    if (result.status == UpdateStatus.available) {
+      final install = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          icon: const Icon(Icons.system_update_rounded),
+          title: Text(s.updateAvailable),
+          content: Text(s.updateAvailableBody(result.availableVersion)),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: Text(s.later),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: Text(s.updateNow),
+            ),
+          ],
+        ),
+      );
+      if (install == true) {
+        final started = await state.installAvailableUpdate();
+        if (!started && context.mounted) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(s.updateFailed)));
+        }
+      }
+      return;
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          result.status == UpdateStatus.upToDate
+              ? s.appIsUpToDate
+              : s.updateCheckUnavailable,
+        ),
+      ),
+    );
   }
 }
 
@@ -164,13 +246,14 @@ class _StudioCard extends StatelessWidget {
                       color: Colors.white.withValues(alpha: 0.22),
                     ),
                   ),
-                  child: const Text(
-                    'AW',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 18,
-                      letterSpacing: -1,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.asset(
+                      'assets/alpware_logo.png',
+                      width: 48,
+                      height: 48,
+                      fit: BoxFit.cover,
+                      cacheWidth: 144,
                     ),
                   ),
                 ),
@@ -326,6 +409,65 @@ class _LinkItem {
   final VoidCallback onTap;
 }
 
+class _NotificationCard extends StatelessWidget {
+  const _NotificationCard({required this.state});
+
+  final AppState state;
+
+  @override
+  Widget build(BuildContext context) {
+    final s = S.of(context);
+    final status = switch (state.notificationAuthorization) {
+      NotificationAuthorization.authorized => s.notificationsAllowed,
+      NotificationAuthorization.denied => s.notificationsNotAllowed,
+      NotificationAuthorization.notDetermined => s.notificationsNotRequested,
+    };
+    final authorized =
+        state.notificationAuthorization == NotificationAuthorization.authorized;
+
+    return _PreferenceCard(
+      icon: authorized
+          ? Icons.notifications_active_rounded
+          : Icons.notifications_off_rounded,
+      title: s.notifications,
+      subtitle: state.notificationPermission.isRequiredForSystemPlayer
+          ? s.notificationsDescription
+          : s.iosSystemPlayerDescription,
+      child: Row(
+        children: [
+          Icon(
+            authorized ? Icons.check_circle_rounded : Icons.info_rounded,
+            color: authorized ? const Color(0xFF54D6A5) : FrekioPalette.pink,
+            size: 20,
+          ),
+          const SizedBox(width: 8),
+          Expanded(child: Text(status)),
+          FilledButton.tonal(
+            onPressed: state.notificationPermission.isRequiredForSystemPlayer
+                ? () async {
+                    if (state.notificationAuthorization ==
+                        NotificationAuthorization.notDetermined) {
+                      await state.requestNotificationPermission();
+                    } else {
+                      await state.openNotificationSettings();
+                    }
+                  }
+                : null,
+            child: Text(
+              !state.notificationPermission.isRequiredForSystemPlayer
+                  ? s.notificationsAllowed
+                  : state.notificationAuthorization ==
+                        NotificationAuthorization.notDetermined
+                  ? s.allow
+                  : s.settings,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _LinkGroup extends StatelessWidget {
   const _LinkGroup({required this.items});
 
@@ -382,6 +524,10 @@ class _LinkTile extends StatelessWidget {
 }
 
 class _ApplicationCard extends StatelessWidget {
+  const _ApplicationCard({required this.state});
+
+  final AppState state;
+
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
@@ -413,7 +559,7 @@ class _ApplicationCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 3),
                       Text(
-                        '${s.version} 1.3.0 (4) • MIT',
+                        '${s.version} ${state.appVersion?.display ?? '—'} • MIT',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
@@ -457,7 +603,7 @@ class _ApplicationCard extends StatelessWidget {
                 onTap: () => showLicensePage(
                   context: context,
                   applicationName: 'Frekio',
-                  applicationVersion: '1.3.0 (4)',
+                  applicationVersion: state.appVersion?.display ?? '',
                   applicationIcon: Padding(
                     padding: const EdgeInsets.all(8),
                     child: Image.asset(

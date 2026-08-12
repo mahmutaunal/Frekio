@@ -8,6 +8,9 @@ These are submission working notes, not a substitute for checking the final Play
 - `WAKE_LOCK`: required by the background audio stack while playback is active.
 - `FOREGROUND_SERVICE`: background user-visible audio playback.
 - `FOREGROUND_SERVICE_MEDIA_PLAYBACK`: Android 14+ media-playback FGS type.
+- `POST_NOTIFICATIONS`: Android 13+ runtime permission for user-visible playback
+  artwork and controls. It is requested only in direct response to the first
+  playback action, and playback remains usable when permission is declined.
 
 No location, contacts, camera, microphone, storage/media-library, advertising ID, SMS or phone permissions are requested.
 
@@ -33,6 +36,8 @@ The app sends:
 - Radio Browser API requests to retrieve station metadata.
 - A station-selection click request to Radio Browser when the user selects a station.
 - Direct network requests to the broadcaster stream chosen by the user.
+- Google Play In-App Review and In-App Update requests when rating or update
+  functionality is invoked. These flows are handled by Google Play.
 
 The app itself has no account, analytics, advertising, tracking SDK or developer backend. Favorites/recent history/settings stay on device.
 

@@ -16,9 +16,17 @@ class PreferencesStore {
   static const _localeKey = 'locale.v1';
   static const _themeKey = 'theme.v1';
   static const _lastStationKey = 'last_station.v1';
+  static const _installedAtKey = 'installed_at.v1';
+  static const _playbackCountKey = 'meaningful_playback_count.v1';
+  static const _reviewVersionKey = 'review_requested_version.v1';
 
-  static Future<PreferencesStore> create() async =>
-      PreferencesStore._(await SharedPreferences.getInstance());
+  static Future<PreferencesStore> create() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!prefs.containsKey(_installedAtKey)) {
+      await prefs.setString(_installedAtKey, DateTime.now().toIso8601String());
+    }
+    return PreferencesStore._(prefs);
+  }
 
   List<Station> get favorites => _readStations(_favoritesKey);
   List<Station> get recent => _readStations(_recentKey);
@@ -35,6 +43,10 @@ class PreferencesStore {
 
   String get localeCode => _prefs.getString(_localeKey) ?? 'system';
   String get themeMode => _prefs.getString(_themeKey) ?? 'system';
+  DateTime? get installedAt =>
+      DateTime.tryParse(_prefs.getString(_installedAtKey) ?? '');
+  int get meaningfulPlaybackCount => _prefs.getInt(_playbackCountKey) ?? 0;
+  String? get reviewRequestedVersion => _prefs.getString(_reviewVersionKey);
 
   Future<void> setFavorites(List<Station> value) =>
       _writeStations(_favoritesKey, value);
@@ -53,6 +65,14 @@ class PreferencesStore {
   Future<void> setLocaleCode(String value) =>
       _prefs.setString(_localeKey, value);
   Future<void> setThemeMode(String value) => _prefs.setString(_themeKey, value);
+  Future<int> incrementMeaningfulPlaybackCount() async {
+    final next = meaningfulPlaybackCount + 1;
+    await _prefs.setInt(_playbackCountKey, next);
+    return next;
+  }
+
+  Future<void> setReviewRequestedVersion(String value) =>
+      _prefs.setString(_reviewVersionKey, value);
 
   List<Station> _readStations(String key) {
     final raw = _prefs.getString(key);

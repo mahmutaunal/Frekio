@@ -8,17 +8,23 @@ import 'data/radio_browser_api.dart';
 import 'domain/station.dart';
 import 'services/radio_audio_handler.dart';
 import 'services/platform_widget_bridge.dart';
+import 'services/app_engagement_service.dart';
+import 'services/notification_permission_service.dart';
 
 class AppState extends ChangeNotifier {
   AppState({
     required this.api,
     required this.preferences,
     required this.audioHandler,
+    required this.engagement,
+    required this.notificationPermission,
   });
 
   final RadioBrowserApi api;
   final PreferencesStore preferences;
   final RadioAudioHandler audioHandler;
+  final AppEngagementService engagement;
+  final NotificationPermissionService notificationPermission;
 
   List<Station> popular = const [];
   List<Station> favorites = const [];
@@ -34,6 +40,11 @@ class AppState extends ChangeNotifier {
   Locale? locale;
   ThemeMode themeMode = ThemeMode.system;
   Duration? sleepTimerDuration;
+  AppVersionInfo? appVersion;
+  NotificationAuthorization notificationAuthorization =
+      NotificationAuthorization.notDetermined;
+  UpdateCheckResult? updateResult;
+  bool checkingForUpdate = false;
 
   StreamSubscription<Station?>? _stationSub;
   StreamSubscription<PlaybackState>? _playbackSub;
@@ -57,6 +68,13 @@ class AppState extends ChangeNotifier {
       'dark' => ThemeMode.dark,
       _ => ThemeMode.system,
     };
+
+    final platformDetails = await Future.wait<Object>([
+      engagement.versionInfo(),
+      notificationPermission.status(),
+    ]);
+    appVersion = platformDetails[0] as AppVersionInfo;
+    notificationAuthorization = platformDetails[1] as NotificationAuthorization;
 
     _stationSub = audioHandler.stationStream.listen((station) {
       currentStation = station;
@@ -103,9 +121,18 @@ class AppState extends ChangeNotifier {
     errorMessage = null;
     liveTitle = null;
     notifyListeners();
+    if (notificationPermission.isRequiredForSystemPlayer &&
+        notificationAuthorization == NotificationAuthorization.notDetermined) {
+      // Ask in direct response to the first playback action. Playback is never
+      // blocked when the person declines: Android media sessions are exempt,
+      // while permission still improves notification-drawer visibility on OEM
+      // variants such as One UI.
+      await requestNotificationPermission();
+    }
     await audioHandler.playStation(station);
     recent = preferences.recent;
     notifyListeners();
+    unawaited(engagement.recordMeaningfulPlayback());
   }
 
   Future<void> togglePlayback() => audioHandler.toggle();
@@ -200,6 +227,40 @@ class AppState extends ChangeNotifier {
     await preferences.setThemeMode(value);
     notifyListeners();
   }
+
+  Future<NotificationAuthorization> requestNotificationPermission() async {
+    notificationAuthorization = await notificationPermission.request();
+    notifyListeners();
+    return notificationAuthorization;
+  }
+
+  Future<void> openNotificationSettings() =>
+      notificationPermission.openSettings();
+
+  Future<void> refreshNotificationStatus() async {
+    notificationAuthorization = await notificationPermission.status();
+    notifyListeners();
+  }
+
+  Future<UpdateCheckResult> checkForUpdate() async {
+    if (checkingForUpdate) {
+      return updateResult ??
+          const UpdateCheckResult(status: UpdateStatus.unavailable);
+    }
+    checkingForUpdate = true;
+    notifyListeners();
+    try {
+      updateResult = await engagement.checkForUpdate();
+      return updateResult!;
+    } finally {
+      checkingForUpdate = false;
+      notifyListeners();
+    }
+  }
+
+  Future<bool> installAvailableUpdate() => engagement.installAvailableUpdate();
+
+  Future<bool> requestNativeReview() => engagement.requestNativeReview();
 
   void _updatePlatformWidget() {
     final station = currentStation;

@@ -43,6 +43,10 @@ CarPlay all share the same playback state.
 - Live ICY programme and track metadata when provided by the broadcaster.
 - Background playback with bounded reconnect behavior and a sleep timer.
 - Android MediaStyle and iOS Now Playing controls.
+- First-play Android media-player permission with system-settings recovery;
+  iOS Now Playing requires no notification permission.
+- Native in-app rating prompts after meaningful use.
+- Automatic store update checks and Google Play in-app updates.
 - Interactive Android and iOS 17+ home-screen widgets.
 - Android Auto browsing, playback, and voice search.
 - Native CarPlay Favorites and Recent templates.
@@ -60,6 +64,8 @@ CarPlay all share the same playback state.
 | Home-screen widget | AppWidgetProvider | WidgetKit, iOS 17+ |
 | In-car experience | Android Auto | CarPlay audio templates |
 | Adaptive layout | Phone and tablet | iPhone and iPad |
+| Ratings | Google Play In-App Review | StoreKit review prompt |
+| Updates | Google Play in-app update | App Store version check |
 
 CarPlay distribution requires the appropriate capability from Apple. The App
 Group used by the iOS app and widget must also be enabled in the Apple Developer

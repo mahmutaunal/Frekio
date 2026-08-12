@@ -201,7 +201,7 @@
         network requests are necessary to discover and play Internet radio.
       </p>
       <div class="meta">
-        <span class="pill">Effective 11 August 2026</span>
+        <span class="pill">Effective 12 August 2026</span>
         <span class="pill">Frekio for Android and iOS</span>
       </div>
       <nav class="language-nav" aria-label="Policy languages">
@@ -242,6 +242,7 @@
           <li>language, appearance, and playback preferences;</li>
           <li>cached public station-directory data and timestamps; and</li>
           <li>current station and artwork state used by the home-screen widget.</li>
+          <li>install date, a coarse playback-action count, and rating-request version.</li>
         </ul>
         <p>
           This information remains under the control of your device and is removed
@@ -272,6 +273,11 @@
             station logo from the image URL published in the directory. The image host
             may receive standard network information.
           </li>
+          <li>
+            <strong>App stores:</strong> Frekio asks Google Play or the Apple App Store
+            whether an update is available. Native rating and update flows are handled
+            by the applicable store under its own privacy policy.
+          </li>
         </ul>
         <div class="callout">
           These services are independent from AlpWare Studio and may process technical
@@ -283,7 +289,11 @@
         <h3>5. Permissions and device capabilities</h3>
         <p>
           Frekio uses Internet access, user-visible background media playback, media
-          controls, and widget capabilities. It does not request access to your precise
+          controls, and widget capabilities. On Android 13 and later, notification
+          authorization is requested on first playback so the system media player remains
+          visible in the notification panel; it may be declined or changed in system settings.
+          The iOS Now Playing interface does not require notification authorization.
+          Frekio does not request access to your precise
           or approximate location, contacts, camera, microphone, photo library, SMS,
           call log, advertising identifier, or broad file storage.
         </p>
@@ -371,6 +381,7 @@
           <li>dil, görünüm ve oynatma tercihleri;</li>
           <li>önbelleğe alınmış herkese açık istasyon dizini verileri ve zamanları; ve</li>
           <li>ana ekran widget'ının kullandığı mevcut istasyon ve kapak durumu.</li>
+          <li>kurulum tarihi, genel oynatma işlemi sayısı ve değerlendirme isteği sürümü.</li>
         </ul>
         <p>
           Bu bilgiler cihazınızın kontrolünde kalır ve işletim sisteminizin sakladığı
@@ -400,6 +411,11 @@
             dizinde yayımlanan görsel adresinden istasyon logosunu isteyebilir. Görsel
             sunucusu standart ağ bilgilerini alabilir.
           </li>
+          <li>
+            <strong>Uygulama mağazaları:</strong> Frekio, güncelleme olup olmadığını
+            Google Play veya Apple App Store üzerinden denetler. Native değerlendirme
+            ve güncelleme akışları ilgili mağaza tarafından kendi politikası kapsamında işlenir.
+          </li>
         </ul>
         <div class="callout">
           Bu hizmetler AlpWare Studio'dan bağımsızdır ve teknik istek kayıtlarını kendi
@@ -411,7 +427,10 @@
         <h3>5. İzinler ve cihaz yetenekleri</h3>
         <p>
           Frekio; internet erişimi, kullanıcıya görünür arka plan medya oynatımı, medya
-          kontrolleri ve widget özelliklerini kullanır. Kesin veya yaklaşık konum,
+          kontrolleri ve widget özelliklerini kullanır. Android 13 ve sonrasında sistem
+          medya oynatıcısının bildirim panelinde görünmesi için bildirim izni ilk oynatmada
+          istenir; izin reddedilebilir veya sistem ayarlarından değiştirilebilir. iOS Now
+          Playing arayüzü bildirim izni gerektirmez. Frekio kesin veya yaklaşık konum,
           kişiler, kamera, mikrofon, fotoğraf arşivi, SMS, arama kaydı, reklam kimliği
           ya da geniş dosya depolama erişimi istemez.
         </p>

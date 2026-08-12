@@ -54,4 +54,5 @@ import WidgetKit
   func sendPlaybackCommand(_ method: String, argument: Any? = nil) {
     frekioChannel?.invokeMethod(method, arguments: argument)
   }
+
 }

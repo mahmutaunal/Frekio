@@ -105,4 +105,46 @@ class S {
   String get linkUnavailable => _tr
       ? 'Bağlantı şu anda açılamıyor.'
       : 'The link cannot be opened right now.';
+  String get notifications =>
+      _tr ? 'Sistem medya oynatıcısı' : 'System media player';
+  String get notificationsDescription => _tr
+      ? 'Kapak görselini ve kontrolleri bildirim panelinde göster'
+      : 'Show artwork and controls in the notification panel';
+  String get iosSystemPlayerDescription => _tr
+      ? 'Kapak görselini ve kontrolleri Kilit Ekranı ile Denetim Merkezi’nde göster'
+      : 'Show artwork and controls on the Lock Screen and in Control Center';
+  String get notificationsAllowed => _tr ? 'Kullanıma hazır' : 'Ready';
+  String get notificationsNotAllowed => _tr ? 'İzin verilmedi' : 'Not allowed';
+  String get notificationsNotRequested =>
+      _tr ? 'Henüz sorulmadı' : 'Not requested yet';
+  String get allow => _tr ? 'İzin ver' : 'Allow';
+  String get notNow => _tr ? 'Şimdi değil' : 'Not now';
+  String get rateFrekio => _tr ? 'Frekio’yu değerlendir' : 'Rate Frekio';
+  String get rateFrekioDescription => _tr
+      ? 'Mağazanın güvenli değerlendirme ekranını aç'
+      : 'Open the store’s secure native rating flow';
+  String get reviewUnavailable => _tr
+      ? 'Değerlendirme ekranı şu anda kullanılamıyor.'
+      : 'The rating flow is currently unavailable.';
+  String get updates => _tr ? 'Güncellemeler' : 'Updates';
+  String get checkForUpdates =>
+      _tr ? 'Güncellemeleri denetle' : 'Check for updates';
+  String get checkingForUpdates =>
+      _tr ? 'Güncellemeler denetleniyor…' : 'Checking for updates…';
+  String get appIsUpToDate => _tr ? 'Frekio güncel' : 'Frekio is up to date';
+  String get updateCheckUnavailable => _tr
+      ? 'Mağaza şu anda denetlenemedi. Play Store veya App Store üzerinden yüklenen sürümlerde tekrar deneyin.'
+      : 'The store could not be checked right now. Try again with a build installed from Google Play or the App Store.';
+  String get updateAvailable =>
+      _tr ? 'Yeni bir sürüm hazır' : 'A new version is ready';
+  String updateAvailableBody(String? version) => _tr
+      ? '${version == null ? 'Frekio’nun yeni sürümü' : 'Frekio $version'} indirilmeye hazır.'
+      : '${version == null ? 'A new Frekio version' : 'Frekio $version'} is ready to download.';
+  String get updateNow => _tr ? 'Şimdi güncelle' : 'Update now';
+  String get later => _tr ? 'Daha sonra' : 'Later';
+  String get updateFailed => _tr
+      ? 'Güncelleme başlatılamadı. Lütfen daha sonra tekrar deneyin.'
+      : 'The update could not be started. Please try again later.';
+  String get engagement =>
+      _tr ? 'Destek ve güncellemeler' : 'Support & updates';
 }
