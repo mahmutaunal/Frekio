@@ -1,7 +1,7 @@
 name: frekio_radio
 description: A privacy-friendly, open-source Internet radio app focused on Turkey.
 publish_to: "none"
-version: 1.0.0+4
+version: 1.0.0+5
 
 environment:
   sdk: ">=3.10.0 <4.0.0"
@@ -29,4 +29,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/alpware_logo.png
-    - assets/brand/frekio_icon_1024.png
+    - assets/logo.png

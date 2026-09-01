@@ -84,7 +84,7 @@ class _BrandMark extends StatelessWidget {
       ClipRRect(
         borderRadius: BorderRadius.circular(18),
         child: Image.asset(
-          'assets/brand/frekio_icon_1024.png',
+          'assets/logo.png',
           width: 58,
           height: 58,
           cacheWidth: 174,

@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/brand/frekio_icon_1024.png" alt="Frekio app icon" width="112" />
+  <img src="assets/logo.png" alt="Frekio app icon" width="112" />
   <h1>Frekio</h1>
   <p><strong>A focused, privacy-respecting Internet radio app for Android and iOS.</strong></p>
   <p>

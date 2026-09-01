@@ -128,7 +128,17 @@ class RadioAudioHandler extends BaseAudioHandler with QueueHandler {
   Future<void> _loadAndPlay(Station station) async {
     await _player.stop();
     await _player.setUrl(station.streamUrl);
-    if (_wantsPlayback) await _player.play();
+    if (_wantsPlayback) _startPlayback();
+  }
+
+  void _startPlayback() {
+    unawaited(
+      _player.play().catchError((Object error, StackTrace stackTrace) {
+        if (!_wantsPlayback) return;
+        _errorController.add(error.toString());
+        _scheduleReconnect();
+      }),
+    );
   }
 
   @override
@@ -147,7 +157,10 @@ class RadioAudioHandler extends BaseAudioHandler with QueueHandler {
       }
       return;
     }
-    await _player.play();
+    // AudioPlayer.play() completes only after playback is paused, stopped, or
+    // completed. A media-session command must return as soon as playback has
+    // been started, otherwise Android Auto can treat the command as stalled.
+    _startPlayback();
   }
 
   @override
@@ -167,7 +180,11 @@ class RadioAudioHandler extends BaseAudioHandler with QueueHandler {
     _cancelReconnect();
     _reconnectAttempt = 0;
     await _player.stop();
-    return super.stop();
+    // Do not call BaseAudioHandler.stop(). It publishes
+    // AudioProcessingState.idle, which audio_service maps to STATE_NONE on
+    // Android. Android Auto disables the playback UI in that state, so a later
+    // Play command cannot reliably resume the station. just_audio's stop()
+    // releases its native resources while retaining the source for resumption.
   }
 
   Future<void> toggle() async {
@@ -361,13 +378,10 @@ class RadioAudioHandler extends BaseAudioHandler with QueueHandler {
 
   void _broadcastState(PlaybackEvent event) {
     final playing = _player.playing;
-    final processingState = switch (_player.processingState) {
-      ProcessingState.idle => AudioProcessingState.idle,
-      ProcessingState.loading => AudioProcessingState.loading,
-      ProcessingState.buffering => AudioProcessingState.buffering,
-      ProcessingState.ready => AudioProcessingState.ready,
-      ProcessingState.completed => AudioProcessingState.completed,
-    };
+    final processingState = carCompatibleProcessingState(
+      playerState: _player.processingState,
+      hasPlayableStation: _currentStation != null,
+    );
 
     playbackState.add(
       PlaybackState(
@@ -410,6 +424,24 @@ class RadioAudioHandler extends BaseAudioHandler with QueueHandler {
     await _player.dispose();
   }
 }
+
+/// Maps the player lifecycle to a media-session lifecycle that remains
+/// resumable from Android Auto.
+///
+/// An idle player with a remembered station is stopped, not empty. Exposing it
+/// as [AudioProcessingState.ready] produces Android's paused state and keeps
+/// the Play action available. A genuinely empty player remains idle.
+AudioProcessingState carCompatibleProcessingState({
+  required ProcessingState playerState,
+  required bool hasPlayableStation,
+}) => switch (playerState) {
+  ProcessingState.idle =>
+    hasPlayableStation ? AudioProcessingState.ready : AudioProcessingState.idle,
+  ProcessingState.loading => AudioProcessingState.loading,
+  ProcessingState.buffering => AudioProcessingState.buffering,
+  ProcessingState.ready => AudioProcessingState.ready,
+  ProcessingState.completed => AudioProcessingState.completed,
+};
 
 extension _FirstOrNull<T> on Iterable<T> {
   T? get firstOrNull => isEmpty ? null : first;

@@ -243,7 +243,7 @@ class _GlassNavigation extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(14),
               child: Image.asset(
-                'assets/brand/frekio_icon_1024.png',
+                'assets/logo.png',
                 width: 44,
                 height: 44,
                 cacheWidth: 132,
